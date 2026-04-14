@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Maira Lopes | Desenvolvedora Back-end </title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #F9F5FC 0%, #F2EBF8 100%);
+            color: #2D2A3E;
+            font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.2rem;
+        }
+
+        /* Sticky Menu */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(249, 245, 252, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(190, 150, 190, 0.35);
+            padding: 0.75rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #B5838D, #9C6E8F);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            color: #5D4A66;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #B5678A;
+        }
+
+        /* Hamburger mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.3rem;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #9C6E8F;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: rgba(249, 245, 252, 0.98);
+            border-top: 1px solid rgba(190, 150, 190, 0.2);
+            padding: 1rem 1.2rem;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .mobile-menu ul a {
+            color: #5D4A66;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            display: block;
+            padding: 0.4rem 0;
+        }
+
+        /* Botões */
+        .btn-primary {
+            background: rgba(180, 130, 160, 0.15);
+            border: 1px solid #C29DC2;
+            color: #4A3A55;
+            padding: 0.65rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary:hover {
+            background: #D9B8D9;
+            border-color: #B5839E;
+            color: #2D2A3E;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #C9A9C9;
+            border-radius: 2rem;
+            padding: 0.5rem 1.1rem;
+            color: #5D4A66;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .btn-outline:hover {
+            background: rgba(200, 160, 190, 0.2);
+            border-color: #B27B9E;
+            color: #3E2E4A;
+        }
+
+        .btn-video {
+            background: linear-gradient(135deg, #C58AA5, #A76C8E);
+            border: none;
+            border-radius: 2rem;
+            padding: 0.65rem 1.5rem;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-video:hover {
+            background: linear-gradient(135deg, #D9A7C7, #B5838D);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(165, 100, 140, 0.35);
+        }
+
+        /* Hero header */
+        .hero-header {
+            padding: 0.4rem 0 2rem;
+        }
+
+        .hello-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hello-text {
+            flex: 2;
+            min-width: 260px;
+        }
+
+        .hello-text h1 {
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #6A4E6E, #B5838D);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hello-sub {
+            font-size: 1rem;
+            color: #6E4F6E;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        .hero-photo {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 220px;
+            padding: 0.1rem 0 0;
+        }
+
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #EAD5E6, #D9BFD9);
+            padding: 5px;
+            box-shadow: 0 20px 35px -12px rgba(130, 80, 110, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #FFF9FC;
+            background-color: #F2E6F0;
+        }
+
+        /* Apresentação */
+        .presentation-section {
+            margin: 2rem 0 3rem;
+            background: rgba(255, 248, 252, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: clamp(1.2rem, 5vw, 2rem);
+            border: 1px solid rgba(190, 150, 180, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2.5rem;
+        }
+
+        .presentation-content {
+            flex: 1.5;
+        }
+
+        .presentation-title {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #4F3962;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .presentation-bio {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #544A62;
+            border-left: 3px solid #D9A7C7;
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .specs-only {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .spec-card-single {
+            background: rgba(250, 240, 248, 0.6);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(200, 160, 190, 0.4);
+            transition: all 0.2s;
+        }
+
+        .spec-card-single:hover {
+            background: rgba(255, 245, 252, 0.9);
+            border-color: #D9A7C7;
+        }
+
+        .spec-card-single i {
+            font-size: 1.8rem;
+            color: #B5838D;
+            margin-bottom: 0.8rem;
+        }
+
+        .spec-card-single h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #563C64;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge-list span {
+            background: #EAD5E6;
+            padding: 0.3rem 0.9rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #5E4270;
+        }
+
+        /* Tech Stack */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tech-card {
+            background: rgba(252, 245, 250, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 1.8rem;
+            padding: 1.6rem;
+            border: 1px solid rgba(190, 150, 180, 0.4);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .tech-card:hover {
+            border-color: #D9A7C7;
+            transform: translateY(-3px);
+        }
+
+        .tech-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #B5838D;
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Tech logos com imagens */
+        .tech-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.8rem;
+        }
+
+        .tech-pill-excel {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #EAD5E6;
+            padding: 0.3rem 0.8rem 0.3rem 0.9rem;
+            border-radius: 2rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #5E4270;
+            transition: all 0.2s;
+        }
+
+        .tech-pill-excel:hover {
+            background: #DFC8E0;
+            transform: translateY(-1px);
+        }
+
+        .tech-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #EAD5E6;
+            padding: 0.3rem 0.8rem 0.3rem 0.4rem;
+            border-radius: 2rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #5E4270;
+            transition: all 0.2s;
+        }
+
+        .tech-pill:hover {
+            background: #DFC8E0;
+            transform: translateY(-1px);
+        }
+
+        .tech-pill img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            border-radius: 3px;
+        }
+
+        /* Projetos */
+        .project-card {
+            background: rgba(255, 248, 252, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.6rem;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid rgba(190, 150, 180, 0.4);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: #D9A7C7;
+            background: rgba(255, 245, 252, 0.95);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #4A3355;
+        }
+
+        .project-desc {
+            color: #5E4A6B;
+            margin: 0.6rem 0 0.8rem;
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        .project-techs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== OBT — CONQUISTA INÉDITA ===== */
+        .obt-highlight {
+            margin: 3rem 0 2rem;
+            background: linear-gradient(125deg, #F9ECF5, #F4E4F5);
+            border-radius: 2.5rem;
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            border: 1px solid #E8C8E0;
+            box-shadow: 0 18px 35px -12px rgba(150, 90, 130, 0.2);
+        }
+
+        .obt-inner {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .obt-photo-area {
+            flex: 0 0 auto;
+        }
+
+        .obt-photo-frame {
+            width: 420px;
+            height: 420px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 2px solid #E0BCD0;
+            background: #F0E4F0;
+            position: relative;
+            box-shadow: 0 12px 24px -8px rgba(150, 90, 130, 0.25);
+        }
+
+        .obt-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .obt-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #C58AA5;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .obt-photo-placeholder i {
+            font-size: 2.5rem;
+            opacity: 0.6;
+        }
+
+        .obt-content {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .winner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(200, 140, 170, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4rem;
+            margin-bottom: 0.8rem;
+            border: 1px solid #E0BCD0;
+        }
+
+        .winner-badge i {
+            font-size: 1.4rem;
+            color: #D9A38C;
+        }
+
+        .winner-badge span {
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            color: #7A4E6E;
+        }
+
+        .obt-title {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #A76C8E, #C58A9F);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.6rem;
+        }
+
+        .obt-desc {
+            color: #5B4268;
+            font-weight: 500;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .obt-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== GRANDES PROJETOS ===== */
+        .big-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .big-project-card {
+            background: rgba(255, 248, 252, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            border: 1px solid rgba(190, 150, 180, 0.4);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .big-project-card:hover {
+            transform: translateY(-6px);
+            border-color: #D9A7C7;
+            box-shadow: 0 20px 40px -12px rgba(150, 90, 130, 0.2);
+        }
+
+        .big-project-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #EAD5E6, #D9BFD9);
+        }
+
+        .big-project-img-placeholder {
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(135deg, #EAD5E6, #D9BFD9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            color: #B5838D;
+            font-size: 0.8rem;
+        }
+
+        .big-project-img-placeholder i {
+            font-size: 2.5rem;
+            opacity: 0.5;
+        }
+
+        .big-project-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .big-project-role {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #A76C8E;
+            margin-bottom: 0.5rem;
+        }
+
+        .big-project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4A3355;
+            margin-bottom: 0.5rem;
+        }
+
+        .big-project-desc {
+            font-size: 0.9rem;
+            color: #5E4A6B;
+            line-height: 1.55;
+            flex: 1;
+            margin-bottom: 1rem;
+        }
+
+        .big-project-buttons {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 2rem 0;
+            margin-left: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 2px solid rgba(180, 130, 160, 0.6);
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.2rem;
+            top: 0.4rem;
+            width: 0.8rem;
+            height: 0.8rem;
+            background: #C28AB0;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(190, 120, 150, 0.2);
+        }
+
+        .timeline-year {
+            font-size: 0.8rem;
+            color: #B27A9A;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .timeline-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin: 0.2rem 0;
+            color: #4F3962;
+        }
+
+        /* ===== EVENTOS — Novo design em cards ===== */
+        .eventos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .evento-card {
+            background: rgba(252, 245, 250, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 1.8rem;
+            border: 1px solid rgba(190, 150, 180, 0.4);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .evento-card:hover {
+            border-color: #D9A7C7;
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px -10px rgba(150, 90, 130, 0.18);
+        }
+
+        .evento-img-wrap {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #EAD5E6, #D9BFD9);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .evento-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .evento-img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.4rem;
+            color: #B5838D;
+            font-size: 0.75rem;
+        }
+
+        .evento-img-placeholder i {
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .evento-year-badge {
+            position: absolute;
+            top: 0.8rem;
+            right: 0.8rem;
+            background: rgba(249, 245, 252, 0.92);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(190, 150, 180, 0.4);
+            border-radius: 2rem;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #7A4E6E;
+        }
+
+        .evento-body {
+            padding: 1.2rem;
+            flex: 1;
+        }
+
+        .evento-org {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #A76C8E;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.3rem;
+        }
+
+        .evento-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #4F3962;
+            margin-bottom: 0.5rem;
+        }
+
+        .evento-desc {
+            font-size: 0.85rem;
+            color: #5E4A6B;
+            line-height: 1.5;
+        }
+
+        /* Contato */
+        .contact-card {
+            background: rgba(252, 242, 248, 0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: clamp(1.2rem, 5vw, 2rem);
+            border: 1px solid rgba(190, 150, 180, 0.5);
+            text-align: center;
+        }
+
+        .social-links-detailed {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 1.5rem 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(230, 215, 230, 0.4);
+            padding: 0.6rem 1.1rem;
+            border-radius: 3rem;
+            border: 1px solid rgba(190, 150, 180, 0.3);
+            transition: all 0.25s ease;
+        }
+
+        .social-item:hover {
+            background: rgba(220, 195, 215, 0.7);
+            transform: translateY(-3px);
+            border-color: #C28AB0;
+        }
+
+        .social-item a {
+            color: #5D4A66;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+
+        .social-item i {
+            font-size: 1.3rem;
+            color: #B5838D;
+        }
+
+        .contact-phrase {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #7C5E7A;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(180, 140, 170, 0.35);
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: #735F7A;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        /* Certificados expansíveis */
+        .cert-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #B27A9A;
+            font-size: 0.85rem;
+            font-family: inherit;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .cert-toggle:hover {
+            color: #8A5070;
+        }
+
+        .cert-toggle i.arrow {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-toggle.open i.arrow {
+            transform: rotate(180deg);
+        }
+
+        .cert-img-expand {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.3s ease;
+        }
+
+        .cert-img-expand.open {
+            max-height: 600px;
+            margin-top: 0.8rem;
+        }
+
+        .cert-img-expand img {
+            width: 100%;
+            max-width: 480px;
+            border-radius: 1rem;
+            border: 1px solid rgba(190, 150, 180, 0.4);
+            box-shadow: 0 8px 20px -6px rgba(150, 90, 130, 0.2);
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            margin: 3.5rem 0;
+            scroll-margin-top: 90px;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #5F446E, #B27E98);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ===== RESPONSIVO MOBILE ===== */
+        @media (max-width: 992px) {
+            .presentation-section {
+                flex-direction: column;
+                text-align: left;
+                gap: 1.5rem;
+            }
+
+            .specs-only {
+                width: 100%;
+            }
+
+            .obt-inner {
+                flex-direction: column;
+            }
+
+            .obt-photo-area {
+                width: 100%;
+            }
+
+            .obt-photo-frame {
+                width: 100%;
+                height: 220px;
+                border-radius: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hello-grid {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .photo-frame {
+                width: 200px;
+                height: 200px;
+            }
+
+            .social-item {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .big-projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .eventos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .obt-actions {
+                flex-direction: column;
+            }
+
+            .obt-actions a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .project-buttons {
+                flex-direction: column;
+            }
+
+            .project-buttons a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .big-project-buttons {
+                flex-direction: column;
+            }
+
+            .big-project-buttons a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1rem;
+            }
+
+            .presentation-bio {
+                font-size: 15px;
+            }
+
+            .winner-badge span {
+                font-size: 0.75rem;
+            }
+
+            .obt-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="sticky-nav">
+        <div class="container nav-container">
+            <div class="logo">{ Maira Lopes }</div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#apresentacao">Sobre</a></li>
+                <li><a href="#tech">Hard Skills</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#grandes-projetos">Grandes Projetos</a></li>
+                <li><a href="#cursos">Certificações</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#home" onclick="toggleMenu()">Início</a></li>
+                <li><a href="#apresentacao" onclick="toggleMenu()">Sobre</a></li>
+                <li><a href="#tech" onclick="toggleMenu()">Hard Skills</a></li>
+                <li><a href="#projetos" onclick="toggleMenu()">Projetos</a></li>
+                <li><a href="#grandes-projetos" onclick="toggleMenu()">Grandes Projetos</a></li>
+                <li><a href="#cursos" onclick="toggleMenu()">Certificações</a></li>
+                <li><a href="#eventos" onclick="toggleMenu()">Eventos</a></li>
+                <li><a href="#contato" onclick="toggleMenu()">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- HERO -->
+        <section id="home" class="hero-header fade-up">
+            <div class="hello-grid">
+                <div class="hello-text">
+                    <h1>Olá, eu sou a <span style="color:#9C6E8F;">Maira Lopes!</span></h1>
+                    <div class="hello-sub"><i class="fas fa-map-marker-alt"></i> Tianguá, Ceará</div>
+                </div>
+                <div class="hero-photo">
+                    <div class="photo-frame">
+                        <img src="img/foto-maira.jpeg"
+                            alt="Foto de perfil - Maira Lopes">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APRESENTAÇÃO -->
+        <section id="apresentacao" class="fade-up">
+            <div class="presentation-section">
+                <div class="presentation-content">
+                    <div class="presentation-title">
+                        <i class="fas fa-heart"></i>
+                        <span>Minha trajetória e propósito</span>
+                    </div>
+                    <div class="presentation-bio">
+                        <strong>Estudante de Desenvolvimento de Sistemas e desenvolvedora iniciante.</strong> Tenho base
+                        em <strong>Python, Análise de Dados, MySQL, IA generativa, HTML e CSS</strong>. Com isso, crio
+                        projetos inovadores que geram impacto real. <strong>Minha análise crítica é forte: enxergo além
+                            do óbvio e resolvo problemas de verdade.</strong> Quero expandir meus conhecimentos e estou
+                        pronta para aprender o que for preciso para evoluir como desenvolvedora.
+                    </div>
+                </div>
+                <div class="specs-only">
+                    <div class="spec-card-single">
+                        <i class="fas fa-code-branch"></i>
+                        <h4>Especialidades</h4>
+                        <div class="badge-list">
+                            <span>Versionamento Git</span>
+                            <span>Análise de Dados</span>
+                            <span>Banco de Dados</span>
+                            <span>IA generativa</span>
+                            <span>Front-end & Back-end</span>
+                            <span>Resolução de problemas</span>
+                            <span>Lógica de Programação</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECH STACK -->
+        <section id="tech" class="fade-up">
+            <h2><i class="fas fa-cubes"></i> Hard Skills</h2>
+            <p
+                style="color: #544A62;font-size: 15px; margin-bottom: 2rem; border-left: 3px solid #D9A7C7; padding-left: 1.2rem;">
+                Utilizo essas tecnologias para transformar ideias em soluções funcionais. Com Python e análise de dados,
+                foco na <strong>automação de processos</strong> e na <strong>extração de insights valiosos</strong>. No
+                Front-end, busco <strong>criar interfaces responsivas e intuitivas</strong>, enquanto no Back-end e
+                Banco de Dados, <strong>garanto a estrutura e a segurança necessárias</strong> para que cada projeto
+                seja resolvido com <strong>eficiência e escalabilidade</strong>.
+            </p>
+            <div class="bento-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fab fa-python"></i>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Data & IA</h3>
+                    <div class="tech-logos">
+                        <span class="tech-pill">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                alt="Python">
+                            Python
+                        </span>
+                        <span class="tech-pill">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                                alt="Pandas">
+                            Pandas
+                        </span>
+                        <span class="tech-pill">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+                                alt="NumPy">
+                            NumPy
+                        </span>
+                        <span class="tech-pill">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecolab/googlecolab-original.svg"
+                                alt="Colab">
+                            Google Colab
+                        </span>
+                        <span class="tech-pill-excel">
+                            Excel
+                        </span>
+                        <span class="tech-pill">
+                            <i class="fas fa-robot" style="font-size:14px; color:#B5838D;"></i>
+                            IA Generativa
+                        </span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Front-end</h3>
+                    <div class="tech-logos">
+                        <span class="tech-pill">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                alt="HTML5">
+                            HTML5
+                        </span>
+                        <span class="tech-pill">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                alt="CSS3">
+                            CSS3
+                        </span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-database"></i></div>
+                    <h3>Banco de Dados</h3>
+                    <div class="tech-logos">
+                        <span class="tech-pill">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                alt="MySQL">
+                            MySQL
+                        </span>
+                        <span class="tech-pill">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg"
+                                alt="MariaDB">
+                            MariaDB
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OBT — CONQUISTA INÉDITA -->
+        <section id="obt-destaque" class="fade-up">
+            <div class="obt-highlight">
+                <div class="obt-inner">
+                    <!-- Foto da conquista -->
+                    <div class="obt-photo-area">
+                        <div class="obt-photo-frame">
+                            <!-- Substitua o src pela sua foto real da conquista -->
+                            <div class="obt-photo-placeholder">
+                                <img src="img/equipe-ecoradar.jpeg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo -->
+                    <div class="obt-content">
+                        <div class="winner-badge">
+                            <i class="fas fa-trophy"></i>
+                            <span>CONQUISTA INÉDITA</span>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="obt-title">VENCEDORA DA OBT 2025</div>
+                        <p class="obt-desc">
+                            <strong>Olimpíada Brasileira de Tecnologia (OBT) — 1° lugar na Categoria C3</strong><br>
+                            A OBT é uma das principais olimpíadas de tecnologia do Brasil, reunindo escolas de todo o
+                            país. Entre mais de 10 mil participantes, minha equipe conquistou o 1° lugar como melhor
+                            aplicação do evento com o projeto EcoRadar, focado na detecção de incêndios florestais em
+                            tempo real.
+                        </p>
+                        <div class="obt-actions">
+                            <a href="https://youtu.be/Bn37NqadI-8?si=Uv6uwbqS2Iit8vlo" class="btn-video"
+                                target="_blank">
+                                <i class="fas fa-play"></i> Ver Vídeo-Pitch
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- PROJETOS -->
+        <section id="projetos" class="fade-up">
+            <h2><i class="fas fa-laptop-code"></i> Projetos Pessoais em Destaque</h2>
+            <p
+                style="color: #544A62;font-size: 15px; margin-bottom: 2rem; border-left: 3px solid #D9A7C7; padding-left: 1.2rem;">
+                Soluções que desenvolvi para solucionar problemas e colocar em prática o que aprendo.</p>
+            <div class="bento-grid">
+                <div class="project-card">
+                    <div class="project-title">Dashboard de Índice de Estresse Acadêmico</div>
+                    <div class="project-desc"><strong>Objetivo:</strong> Analisar e visualizar os níveis de estresse
+                        acadêmico entre estudantes. O dashboard permite explorar como diferentes fatores (ambiente de
+                        estudo, pressões sociais, estratégias de enfrentamento, etc.) influenciam o estresse dos alunos.
+                    </div>
+                    <div class="badge-list">
+                        <span>Python</span>
+                        <span>Streamlit</span>
+                        <span>Google Colab</span>
+                        <span>Pandas</span>
+                        <span>Plotly Express</span>
+                    </div>
+                    <div class="project-buttons">
+                        <a href="https://github.com/mairoklpss/estresse_academico_analise" class="btn-outline"
+                            target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-title">Womany</div>
+                    <div class="project-desc"><strong>Objetivo:</strong> Integrar networking profissional, mentorias e
+                        cursos capacitantes para facilitar a entrada de mulheres no mercado de trabalho. O projeto
+                        centraliza desenvolvimento de carreira e conexão direta com mentoras para reduzir barreiras de
+                        contratação e promover o crescimento profissional feminino.
+                    </div>
+                    <div class="badge-list">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                    </div>
+                    <div class="project-buttons">
+                        <a href="https://github.com/mairoklpss/Womany-Projeto" class="btn-outline" target="_blank"><i
+                                class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-title">Vitally</div>
+                    <div class="project-desc"><strong>Objetivo:</strong> Ajudar a monitorar a saúde projetada para o
+                        acompanhamento de hábitos saudáveis. O sistema permite o registro e análise de atividades
+                        físicas, cálculo de IMC e controle de ingestão de água, consolidando esses dados em um dashboard
+                        interativo para visualização clara do progresso.
+                    </div>
+                    <div class="badge-list">
+                        <span>Python</span>
+                        <span>Pandas</span>
+                        <span>Streamlit</span>
+                        <span>CSS</span>
+                    </div>
+                    <div class="project-buttons">
+                        <a href="https://github.com/mairoklpss/Vitally-Projeto" class="btn-outline" target="_blank"><i
+                                class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRANDES PROJETOS -->
+        <section id="grandes-projetos" class="fade-up">
+            <h2><i class="fas fa-rocket"></i> Grandes Projetos</h2>
+            <p
+                style="color: #544A62; font-size: 15px; margin-bottom: 2rem; border-left: 3px solid #D9A7C7; padding-left: 1.2rem;">
+                Projetos de maior impacto que ajudei a desenvolver, idealizei ou contribuí de forma significativa —
+                com propósito real e alcance além da sala de aula.
+            </p>
+            <div class="big-projects-grid">
+
+                <!-- EcoRadar -->
+                <div class="big-project-card">
+                    <div class="big-project-img-placeholder">
+                        <img src="img/eco-radar.png"  class="big-project-img">
+                    </div>
+                    <div class="big-project-body">
+                        <div class="big-project-role">
+                            <i class="fas fa-star"></i> Idealizadora
+                        </div>
+                        <div class="big-project-title">EcoRadar</div>
+                        <div class="big-project-desc">
+                            Sistema de detecção de incêndios florestais em tempo real. Vencedor da OBT 2025 —
+                            1° lugar entre mais de 10 mil participantes de todo o Brasil. Combina dados de sensores de
+                            satélites da NASA e alertas automatizados para proteger famílias e comunidades.
+                        </div>
+                        <div class="badge-list" style="margin-bottom: 1rem;">
+                            <span>NasaFirms</span>
+                            <span>Next JS</span>
+                            <span>Fastify</span>
+                        </div>
+                        <div class="big-project-buttons">
+                            <a href="https://youtu.be/Bn37NqadI-8?si=Uv6uwbqS2Iit8vlo" class="btn-video"
+                                target="_blank">
+                                <i class="fas fa-play"></i> Ver Vídeo-Pitch
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IbiaTerra -->
+                <div class="big-project-card">
+                    <div class="big-project-img-placeholder">
+                        <img src="img/ibiaterra.png" class="big-project-img">
+                    </div>
+                    <div class="big-project-body">
+                        <div class="big-project-role">
+                            <i class="fas fa-lightbulb"></i> Idealizadora & Co-fundadora
+                        </div>
+                        <div class="big-project-title">IbiaTerra</div>
+                        <div class="big-project-desc">
+                            Startup idealizada e desenvolvida com minha equipe. Apresentada no Siará Tech Summit
+                            (SEBRAE), demonstrando viabilidade técnica e impacto para o mercado regional. Foco em apoiar
+                            pequenos produtores com a logística de suas mercadorias.
+                        </div>
+                        <div class="badge-list" style="margin-bottom: 1rem;">
+                            <span>Startup</span>
+                            <span>Agronegócio</span>
+                            <span>Colaboração</span>
+                        </div>
+                        <div class="big-project-buttons">
+                            <a href="https://youtu.be/CvuVEMmlnX8?si=cd5KbPNnHiSjOyMk" class="btn-video"
+                                target="_blank">
+                                <i class="fas fa-play"></i> Ver Vídeo-Pitch
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slot para adicionar mais projetos -->
+                <!-- 
+                <div class="big-project-card">
+                    <img src="projeto.jpg" alt="Nome do Projeto" class="big-project-img">
+                    <div class="big-project-body">
+                        <div class="big-project-role"><i class="fas fa-code"></i> Desenvolvedora</div>
+                        <div class="big-project-title">Nome do Projeto</div>
+                        <div class="big-project-desc">Descrição do projeto...</div>
+                        <div class="badge-list" style="margin-bottom:1rem;"><span>Tech</span></div>
+                        <div class="big-project-buttons">
+                            <a href="#" class="btn-video"><i class="fas fa-play"></i> Vídeo Pitch</a>
+                            <a href="#" class="btn-outline"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
+        </section>
+
+        <!-- CURSOS -->
+        <section id="cursos" class="fade-up">
+            <h2><i class="fas fa-graduation-cap"></i> Formações e Certificações</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-title">Cloud Foundations</div>
+                    <div style="font-size:0.9rem; color:#6B5A72;">AWS Academy · 20 horas · Concluído em 13/03/2026</div>
+                    <div
+                        style="font-size:0.9rem; font-weight: 550; margin-top: 8px; margin-bottom: 8px; color:#544A62;">
+                        Conceitos de Cloud Computing, infraestrutura global da AWS, segurança e conformidade na nuvem,
+                        modelos de precificação e suporte técnico básico.</div>
+                        <button class="cert-toggle" onclick="toggleCert(this)">
+                            <i class="fas fa-certificate"></i> Ver certificado <i class="fas fa-chevron-down arrow"></i>
+                        </button>
+                        <div class="cert-img-expand">
+                            <img src="img/aws.png" alt="Certificado SEBRAE">
+                        </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-title">Imersão Dados com Python II</div>
+                    <div style="font-size:0.9rem; color:#6B5A72;">Alura · 4 horas · Concluído em 11/02/2026</div>
+                    <div
+                        style="font-size:0.9rem; font-weight: 550; margin-top: 8px; margin-bottom: 8px; color:#544A62;">
+                        Programação em Python aplicada a dados, uso de bibliotecas como Pandas e Numpy, limpeza e
+                        tratamento de datasets, e visualização de dados.</div>
+                    <button class="cert-toggle" onclick="toggleCert(this)">
+                        <i class="fas fa-certificate"></i> Ver certificado <i class="fas fa-chevron-down arrow"></i>
+                    </button>
+                    <div class="cert-img-expand">
+                        <img src="img/alura.png" alt="Certificado SEBRAE">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-title">Mentorias de Empreendedorismo e Inovação</div>
+                    <div style="font-size:0.9rem; color:#6B5A72;">SEBRAE · 9 horas</div>
+                    <div
+                        style="font-size:0.9rem; font-weight: 550; margin-top: 8px; margin-bottom: 8px; color:#544A62;">
+                        Mentalidade empreendedora, validação de ideias, técnicas de pitch, inovação aplicada a problemas
+                        reais e trabalho sob mentoria.</div>
+                        <button class="cert-toggle" onclick="toggleCert(this)">
+                            <i class="fas fa-certificate"></i> Ver certificado <i class="fas fa-chevron-down arrow"></i>
+                        </button>
+                        <div class="cert-img-expand">
+                            <img src="img/sebrae.png" alt="Certificado SEBRAE">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENTOS — Novo design em cards -->
+        <section id="eventos" class="fade-up">
+            <h2><i class="fas fa-calendar-alt"></i> Eventos e Participações</h2>
+            <div class="eventos-grid">
+
+                <div class="evento-card">
+                    <div class="evento-img-wrap">
+                        <div class="evento-img-placeholder">
+                            <img src="img/sts.jpeg">
+                        </div>
+                        <span class="evento-year-badge">2025</span>
+                    </div>
+                    <div class="evento-body">
+                        <div class="evento-org">SEBRAE</div>
+                        <div class="evento-title">Siará Tech Summit</div>
+                        <div class="evento-desc">Realização de pitch e exposição da startup IbiaTerra idealizada por
+                            mim e minha equipe, demonstrando viabilidade técnica e impacto da solução para o
+                            mercado.</div>
+                    </div>
+                </div>
+
+                <div class="evento-card">
+                    <div class="evento-img-wrap">
+                        <div class="evento-img-placeholder">
+                            <img src="img/ibi-summit.jpeg" >
+                        </div>
+                        <span class="evento-year-badge">2025</span>
+                    </div>
+                    <div class="evento-body">
+                        <div class="evento-org">SEBRAE</div>
+                        <div class="evento-title">Ibiapaba Summit</div>
+                        <div class="evento-desc">Exposição do projeto EcoRadar, vencedor da OBT 2025, com foco em
+                            inovação digital e sustentabilidade para o ecossistema do agronegócio regional.</div>
+                    </div>
+                </div>
+
+                <div class="evento-card">
+                    <div class="evento-img-wrap">
+                        <div class="evento-img-placeholder">
+                            <img src="img/xetib.jpeg">
+                        </div>
+                        <span class="evento-year-badge">2025</span>
+                    </div>
+                    <div class="evento-body">
+                        <div class="evento-org">IFCE</div>
+                        <div class="evento-title">X ETIB</div>
+                        <div class="evento-desc">Participação no X Encontro de Tecnologia da Informação da Ibiapaba,
+                            com palestras sobre IA Generativa no setor de TI e capacitação em desenvolvimento mobile
+                            com Flutter.</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTATO -->
+        <section id="contato" class="contact-section fade-up">
+            <h2><i class="fas fa-heart"></i> Conexões e Redes</h2>
+            <div class="contact-card">
+                <div class="social-links-detailed">
+                    <div class="social-item">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/mairoklpss" target="_blank" rel="noopener noreferrer">
+                            <span>github.com/mairoklpss</span>
+                        </a>
+                    </div>
+                    <div class="social-item">
+                        <i class="fab fa-linkedin-in"></i>
+                        <a href="https://www.linkedin.com/in/maira-lopes-4738a635a/" target="_blank"
+                            rel="noopener noreferrer">
+                            <span>linkedin.com/in/maira-lopes</span>
+                        </a>
+                    </div>
+                    <div class="social-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="">
+                            <span>mairalpscnt@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-phrase">eu também existo aqui!</div>
+                <hr style="margin: 1rem 0; border-color: rgba(190,150,180,0.3);">
+                <p style="font-size: 0.85rem; color:#735F7A;"><i class="fas fa-map-marker-alt"></i> Tianguá, Ceará ·
+                    Disponível para estágio</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Maira Lopes, 2026.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        // Fecha o menu ao clicar fora
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('mobileMenu');
+            const nav = document.querySelector('.sticky-nav');
+            if (!nav.contains(e.target)) {
+                menu.classList.remove('open');
+            }
+        });
+        function toggleCert(btn) {
+            const expand = btn.nextElementSibling;
+            const isOpen = expand.classList.contains('open');
+            expand.classList.toggle('open');
+            btn.classList.toggle('open');
+        }
+    </script>
+
+</body>
+
+</html>
